@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Seller;
 
-use App\Http\Controllers\Controller;
+use App\Seller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class SellerController extends Controller
 {
@@ -14,7 +15,9 @@ class SellerController extends Controller
      */
     public function index()
     {
-        //
+        $sellers = Seller::has('products');
+
+        return response()->json(['data' => $sellers]);
     }
 
     /**
@@ -46,7 +49,9 @@ class SellerController extends Controller
      */
     public function show($id)
     {
-        //
+        $seller = Seller::has('products')->findOrFail($id);
+
+        return response()->json(['data' => $seller]);
     }
 
     /**
