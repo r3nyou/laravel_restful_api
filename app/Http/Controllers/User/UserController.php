@@ -5,9 +5,17 @@ namespace App\Http\Controllers\User;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ApiController;
+use App\Transformers\UserTransformer;
 
 class UserController extends ApiController
 {
+    public function __construct()
+    {
+        parent::__construct();
+        
+        $this->middleware('transform.input:' . UserTransformer::class)->only(['store', 'update']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -18,16 +26,6 @@ class UserController extends ApiController
         $users = User::all();
 
         return $this->showAll($users);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -66,17 +64,6 @@ class UserController extends ApiController
     public function show(User $user)
     {
         return $this->showOne($user, 200);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**
