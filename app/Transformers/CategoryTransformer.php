@@ -39,6 +39,28 @@ class CategoryTransformer extends TransformerAbstract
             'creationDate' => $category->created_at,
             'lastChange' => $category->updated_at,
             'deletedDate' => isset($category->deleted_at) ? (string) $category->deleted_at : null,
+            'links' => [
+                [
+                    'rel' => 'self',
+                    'href' => route('categories.show', $category->id),
+                ],
+                [
+                    'rel' => 'category.buyer',
+                    'href' => route('categories.buyers.index', $category->id),
+                ],
+                [
+                    'rel' => 'category.products',
+                    'href' => route('categories.products.index', $category->id),
+                ],
+                [
+                    'rel' => 'category.sellers',
+                    'href' => route('categories.sellers.index', $category->id),
+                ],
+                [
+                    'rel' => 'category.transactions',
+                    'href' => route('categories.transactions.index', $category->id),
+                ]
+            ],
         ];
     }
 
