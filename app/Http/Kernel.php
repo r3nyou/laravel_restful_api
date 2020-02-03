@@ -42,6 +42,7 @@ class Kernel extends HttpKernel
             'signature:X-Application-Name',
             'throttle:60,1',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            'cors',
         ],
     ];
 
@@ -65,6 +66,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'signature' => \App\Http\Middleware\SignatureMiddleware::class,
         'transform.input' => \App\Http\Middleware\TransformInput::class,
+        'cors' => \App\Http\Middleware\Cors::class,
     ];
 
     /**
